@@ -16,6 +16,13 @@ Description: rgeopackage is an R package with miscellaneous tools in
 License: GPL (>= 3)
 Depends: 
     R (>= 3.1.0)
+Suggests:
+    dplyr,
+    knitr,
+    openssl,
+    RSQLite,
+    sf,
+    stars
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
