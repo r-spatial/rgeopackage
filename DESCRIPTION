@@ -10,7 +10,7 @@ Authors@R: c(
     person("Research Institute for Nature and Forest", 
            email = "info@inbo.be", 
            role = "cph"))
-Description: rgeopackage is an R package with miscellaneous tools in 
+Description: The aim of this package is to provide miscellaneous tools for 
     creating or handling GeoPackage files, currently
     not provided by other R spatial packages or GDAL.
 License: GPL (>= 3)
@@ -23,8 +23,6 @@ Suggests:
     RSQLite,
     sf,
     stars
-VignetteBuilder: 
-    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
