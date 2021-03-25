@@ -552,7 +552,7 @@ to the start of each source file to most effectively state the exclusion of warr
 and each file should have at least the “copyright” line and a pointer to
 where the full notice is found.
 
-    rgeopackage: an R package with miscellaneous tools in creating or handling GeoPackage files
+    rgeopackage: an R package with helper tools in creating or handling GeoPackage files
     Copyright (C) 2021 Research Institute for Nature and Forest
 
     This program is free software: you can redistribute it and/or modify
