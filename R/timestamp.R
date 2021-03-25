@@ -140,6 +140,17 @@ preset_timestamp <- function(timestamp) {
 #' Internally the timestamp is converted to a specific ISO 8601 format
 #' that is required by the GeoPackage standard.
 #'
+#' @note
+#' Directly editing a GeoPackage is not advised; whenever possible use
+#' \code{\link{preset_timestamp}()} since it goes via GDAL.
+#'
+#' However \code{amend_timestamp()} is especially useful when a
+#' GeoPackage file also contains a timestamp in the optional table
+#' \code{gpkg_metadata_reference}, as GDAL does not control that timestamp
+#' as of writing (for GDAL 3.1.3).
+#' See a corresponding \href{https://github.com/OSGeo/gdal/issues/3537}{issue}
+#' in the GDAL source repository.
+#'
 #' @param dsn the path to the GeoPackage file (*.gpkg)
 #' @param timestamp a \code{Date} or \code{POSIXct} object, used to generate
 #' the timestamp.
