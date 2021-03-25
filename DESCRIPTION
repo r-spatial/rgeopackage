@@ -1,0 +1,24 @@
+Package: rgeopackage
+Title: Miscellaneous Tools in Creating or Handling GeoPackage Files
+Version: 0.0.0.900
+Authors@R: c(
+    person(given = "Floris",
+           family = "Vanderhaeghe",
+           role = c("aut", "cre"),
+           email = "floris.vanderhaeghe@inbo.be",
+           comment = c(ORCID = "0000-0002-6378-6229")),
+    person("Research Institute for Nature and Forest", 
+           email = "info@inbo.be", 
+           role = "cph"))
+Description: rgeopackage is an R package with miscellaneous tools in 
+    creating or handling GeoPackage files, currently
+    not provided by other R spatial packages or GDAL.
+License: GPL (>= 3)
+Depends: 
+    R (>= 3.1.0)
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
