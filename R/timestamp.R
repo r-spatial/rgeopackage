@@ -24,6 +24,8 @@
 #' Previous value of system variable \code{OGR_CURRENT_DATE} is returned
 #' invisibly.
 #'
+#' @family functions to control the GeoPackage timestamp(s)
+#'
 #' @examples
 #' library(sf)
 #' library(openssl)
@@ -150,6 +152,8 @@ preset_timestamp <- function(timestamp) {
 #'
 #' @return
 #' \code{NULL} is returned invisibly.
+#'
+#' @family functions to control the GeoPackage timestamp(s)
 #'
 #' @examples
 #' library(sf)

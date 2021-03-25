@@ -104,6 +104,11 @@ md5_stars2 <- md5sum(filepath_stars)
 all.equal(md5_stars1, md5_stars2)
 
 }
+\seealso{
+Other functions to control the GeoPackage timestamp(s): 
+\code{\link{amend_timestamp}()}
+}
 \author{
 Floris Vanderhaeghe, \url{https://github.com/florisvdh}
 }
+\concept{functions to control the GeoPackage timestamp(s)}
