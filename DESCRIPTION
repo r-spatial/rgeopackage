@@ -10,7 +10,7 @@ Authors@R: c(
     person("Research Institute for Nature and Forest", 
            email = "info@inbo.be", 
            role = "cph"))
-Description: The aim of this package is to provide helper tools in 
+Description: The aim of this R package is to provide helper tools in 
     creating or handling GeoPackage files, currently
     not provided by other R spatial packages or GDAL.
 License: GPL (>= 3)
