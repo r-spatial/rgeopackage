@@ -68,7 +68,7 @@ md5_notimeset1 == md5_notimeset2
 
 # Setting a fixed date
 filepath_timeset <- file.path(tempdir(), "b_pump_timeset.gpkg")
-(fixed_date <- as.POSIXct("2020-12-25"))
+(fixed_date <- as.Date("2020-12-25"))
   # write 1 (date):
 st_write(sf_layer, dsn = filepath_timeset, delete_dsn = TRUE)
 amend_timestamp(filepath_timeset, fixed_date)
