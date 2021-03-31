@@ -38,9 +38,9 @@ So when using `sf` you're advised to pass the timestamp as follows:
   Note that this does not affect the value of the environment variable `OGR_CURRENT_DATE`: `config_options = c(OGR_CURRENT_DATE = timestamp)` directly sets the GDAL `OGR_CURRENT_DATE` _configuration option_ which, if unset, inherits from the `OGR_CURRENT_DATE` environment variable.
 Also, note that `st_write()` ends by unsetting the configuration option, so set it in each `st_write()` statement as needed.
   
-  In this case please take care to format the timestamp as required by the GeoPackage standard; cf. example above and [Requirement 15](https://www.geopackage.org/spec120/#r15) in version 1.2.
+  In this case please take care to format the timestamp exactly as required by the GeoPackage standard; cf. example above and [Requirement 15](https://www.geopackage.org/spec120/#r15) in version 1.2.
   
 - for packages relying on `rgdal` it should be possible to set `OGR_CURRENT_DATE` by using `rgdal::setCPLConfigOption()` before doing the write operation.
-Again, take care to format the timestamp as required by the GeoPackage standard.
+Again, take care to format the timestamp exactly as required by the GeoPackage standard.
 
 
