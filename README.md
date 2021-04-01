@@ -20,7 +20,7 @@ See the functions' documentation and examples to get a better understanding.
 remotes::install_github("florisvdh/rgeopackage")
 ```
 
-### Functionality offered by core spatial R packages
+### Related functionality in core spatial R packages
 
 - `sf::st_write()` is [now able to](https://github.com/r-spatial/sf/issues/1618#issuecomment-811231056) set GDAL configuration options through its `config_options` argument.
 So when using `sf` you're advised to pass the timestamp as follows:
