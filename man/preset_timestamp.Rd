@@ -12,7 +12,7 @@ the timestamp.
 For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.}
 }
 \value{
-Previous value of system variable \code{OGR_CURRENT_DATE} is returned
+Previous value of environment variable \code{OGR_CURRENT_DATE} is returned
 invisibly.
 }
 \description{
