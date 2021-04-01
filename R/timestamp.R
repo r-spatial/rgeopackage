@@ -17,8 +17,7 @@
 #'
 #' @param timestamp a \code{Date} or \code{POSIXct} object, used to generate
 #' the timestamp.
-#' For a \code{Date} object, time will be considered as \code{00:00:00} local
-#' time.
+#' For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.
 #'
 #' @return
 #' Previous value of system variable \code{OGR_CURRENT_DATE} is returned
@@ -154,8 +153,7 @@ preset_timestamp <- function(timestamp) {
 #' @param dsn the path to the GeoPackage file (*.gpkg)
 #' @param timestamp a \code{Date} or \code{POSIXct} object, used to generate
 #' the timestamp.
-#' For a \code{Date} object, time will be considered as \code{00:00:00} local
-#' time.
+#' For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.
 #' Defaults to system time, however must be set explicitly for reproducible
 #' workflows.
 #' @param verbose Logical.
