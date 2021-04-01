@@ -11,7 +11,7 @@ See a corresponding [issue](https://github.com/OSGeo/gdal/issues/3537) in the GD
 
 By default, GDAL sets timestamps corresponding to system time, so GeoPackages change when rewriting.
 
-Both functions accept a `Date` or `POSIXct` object and format the timestamp in order to comply with the GeoPackage requiremant.
+Both functions accept a `Date` or `POSIXct` object and format the timestamp in order to comply with the GeoPackage requirement.
 See the functions' documentation and examples to get a better understanding.
 
 ### Installation
