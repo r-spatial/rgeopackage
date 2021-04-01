@@ -24,7 +24,7 @@ remotes::install_github("florisvdh/rgeopackage")
 ### Related functionality in core spatial R packages
 
 - `sf::st_write()` is [now able to](https://github.com/r-spatial/sf/issues/1618#issuecomment-811231056) set GDAL configuration options through its `config_options` argument.
-So when using `sf` you're advised to pass the timestamp as follows:
+So when using `sf` you can pass the timestamp on a per-write basis:
 
   ```r
   library(sf)
