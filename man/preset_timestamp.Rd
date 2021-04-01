@@ -2,18 +2,20 @@
 % Please edit documentation in R/timestamp.R
 \name{preset_timestamp}
 \alias{preset_timestamp}
+\alias{unset_timestamp}
 \title{Preset timestamp to reproducibly write GeoPackage files}
 \usage{
 preset_timestamp(timestamp)
+
+unset_timestamp()
 }
 \arguments{
 \item{timestamp}{a \code{Date} or \code{POSIXct} object, used to generate
 the timestamp.
-For a \code{Date} object, time will be considered as \code{00:00:00} local
-time.}
+For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.}
 }
 \value{
-Previous value of system variable \code{OGR_CURRENT_DATE} is returned
+Previous value of environment variable \code{OGR_CURRENT_DATE} is returned
 invisibly.
 }
 \description{
@@ -23,7 +25,11 @@ After this, newly written GeoPackage files
 created by the GDAL vector or raster driver (e.g. through
 \code{sf::st_write()} or \code{stars::write_stars()})
 will carry this timestamp.
-As such the function assists in making a binary-reproducible GeoPackage file.
+As such \code{preset_timestamp()} assists in making a binary-reproducible
+GeoPackage file.
+
+\code{unset_timestamp()} removes \code{OGR_CURRENT_DATE} from the
+environment.
 }
 \details{
 The function converts the timestamp to a very specific ISO 8601 format
@@ -32,6 +38,9 @@ Cf. \href{https://www.geopackage.org/spec130/#r15}{Requirement 15} in
 version 1.3.
 GDAL uses the timestamp to set the \code{last_change} column of the
 \code{gpkg_contents} table in newly written GeoPackage files.
+
+The timestamp set by \code{preset_timestamp()} is adopted by GDAL during
+the entire session, unless \code{unset_timestamp()} is called.
 }
 \examples{
 library(sf)

@@ -2,3 +2,4 @@
 
 export(amend_timestamp)
 export(preset_timestamp)
+export(unset_timestamp)

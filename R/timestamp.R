@@ -1,13 +1,19 @@
 #' Preset timestamp to reproducibly write GeoPackage files
 #'
+#' @description
 #' Presets the timestamp for usage by GDAL by setting the environment variable
 #' \code{OGR_CURRENT_DATE}.
 #' After this, newly written GeoPackage files
 #' created by the GDAL vector or raster driver (e.g. through
 #' \code{sf::st_write()} or \code{stars::write_stars()})
 #' will carry this timestamp.
-#' As such the function assists in making a binary-reproducible GeoPackage file.
+#' As such \code{preset_timestamp()} assists in making a binary-reproducible
+#' GeoPackage file.
 #'
+#' \code{unset_timestamp()} removes \code{OGR_CURRENT_DATE} from the
+#' environment.
+#'
+#' @details
 #' The function converts the timestamp to a very specific ISO 8601 format
 #' that is required by the GeoPackage standard, including conversion to UTC.
 #' Cf. \href{https://www.geopackage.org/spec130/#r15}{Requirement 15} in
@@ -15,13 +21,15 @@
 #' GDAL uses the timestamp to set the \code{last_change} column of the
 #' \code{gpkg_contents} table in newly written GeoPackage files.
 #'
+#' The timestamp set by \code{preset_timestamp()} is adopted by GDAL during
+#' the entire session, unless \code{unset_timestamp()} is called.
+#'
 #' @param timestamp a \code{Date} or \code{POSIXct} object, used to generate
 #' the timestamp.
-#' For a \code{Date} object, time will be considered as \code{00:00:00} local
-#' time.
+#' For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.
 #'
 #' @return
-#' Previous value of system variable \code{OGR_CURRENT_DATE} is returned
+#' Previous value of environment variable \code{OGR_CURRENT_DATE} is returned
 #' invisibly.
 #'
 #' @family functions to control the GeoPackage timestamp(s)
@@ -116,6 +124,12 @@ preset_timestamp <- function(timestamp) {
 
 
 
+#' @rdname preset_timestamp
+#' @export
+unset_timestamp <- function() Sys.unsetenv("OGR_CURRENT_DATE")
+
+
+
 
 
 
@@ -154,8 +168,7 @@ preset_timestamp <- function(timestamp) {
 #' @param dsn the path to the GeoPackage file (*.gpkg)
 #' @param timestamp a \code{Date} or \code{POSIXct} object, used to generate
 #' the timestamp.
-#' For a \code{Date} object, time will be considered as \code{00:00:00} local
-#' time.
+#' For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.
 #' Defaults to system time, however must be set explicitly for reproducible
 #' workflows.
 #' @param verbose Logical.
