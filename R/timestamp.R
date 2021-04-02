@@ -32,7 +32,10 @@
 #' Previous value of environment variable \code{OGR_CURRENT_DATE} is returned
 #' invisibly.
 #'
-#' @family functions to control the GeoPackage timestamp(s)
+#' @seealso
+#' Other functions to control the GeoPackage timestamp(s):
+#' \code{\link{amend_timestamp}},
+#' \code{\link[sf:st_write]{sf::st_write}}
 #'
 #' @examples
 #' library(sf)
@@ -177,7 +180,10 @@ unset_timestamp <- function() Sys.unsetenv("OGR_CURRENT_DATE")
 #' @return
 #' \code{NULL} is returned invisibly.
 #'
-#' @family functions to control the GeoPackage timestamp(s)
+#' @seealso
+#' Other functions to control the GeoPackage timestamp(s):
+#' \code{\link{preset_timestamp}},
+#' \code{\link[sf:st_write]{sf::st_write}}
 #'
 #' @examples
 #' library(sf)

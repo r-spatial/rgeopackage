@@ -114,10 +114,10 @@ all.equal(md5_stars1, md5_stars2)
 
 }
 \seealso{
-Other functions to control the GeoPackage timestamp(s): 
-\code{\link{amend_timestamp}()}
+Other functions to control the GeoPackage timestamp(s):
+\code{\link{amend_timestamp}},
+\code{\link[sf:st_write]{sf::st_write}}
 }
 \author{
 Floris Vanderhaeghe, \url{https://github.com/florisvdh}
 }
-\concept{functions to control the GeoPackage timestamp(s)}

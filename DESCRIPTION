@@ -12,7 +12,9 @@ Authors@R: c(
            role = "cph"))
 Description: The aim of this R package is to provide helper tools in 
     creating or handling GeoPackage files, in order to complement
-    other R spatial packages or GDAL.
+    other R spatial packages or GDAL. The package has no dependencies 
+    on other spatial packages and is not tied to any particular package 
+    by design.
 License: GPL (>= 3)
 Depends: 
     R (>= 3.1.0)
