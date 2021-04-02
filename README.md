@@ -21,6 +21,10 @@ See the functions' documentation and examples to get a better understanding.
 remotes::install_github("florisvdh/rgeopackage")
 ```
 
+### Untied to other packages
+
+`rgeopackage` has no dependencies on other spatial packages and is not tied to any particular package by design.
+
 ### Related functionality in core spatial R packages
 
 - `sf::st_write()` is [now able to](https://github.com/r-spatial/sf/issues/1618#issuecomment-811231056) set GDAL configuration options through its `config_options` argument.
