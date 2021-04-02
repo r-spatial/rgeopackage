@@ -41,7 +41,7 @@ Also, note that `st_write()` ends by unsetting the configuration option, so set 
   
   In this case please take care to format the timestamp exactly as required by the GeoPackage standard; cf. example above and [Requirement 15](https://www.geopackage.org/spec120/#r15) in version 1.2.
   
-- for packages relying on `rgdal` it should be possible to set `OGR_CURRENT_DATE` by using `rgdal::setCPLConfigOption()` before doing the write operation.
+- for packages relying on `rgdal` - like `sp` - it should be possible to set `OGR_CURRENT_DATE` by using `rgdal::setCPLConfigOption()` before doing the write operation.
 Again, take care to format the timestamp exactly as required by the GeoPackage standard.
 
 
