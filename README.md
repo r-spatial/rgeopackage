@@ -18,7 +18,7 @@ See the functions' documentation and examples to get a better understanding.
 ### Installation
 
 ```r
-remotes::install_github("florisvdh/rgeopackage")
+remotes::install_github("r-spatial/rgeopackage")
 ```
 
 ### Untied to other packages
