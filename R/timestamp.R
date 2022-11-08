@@ -261,10 +261,8 @@ amend_timestamp <- function(dsn,
   has_metadata <-
     has_query_rows(
       con,
-      c(
-        "SELECT name FROM sqlite_master",
-        "WHERE name == 'gpkg_metadata_reference'"
-      )
+      "SELECT name FROM sqlite_master
+      WHERE name == 'gpkg_metadata_reference'",
     )
 
   if (has_metadata) {
