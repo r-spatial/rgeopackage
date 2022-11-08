@@ -2,7 +2,7 @@
 #'
 #' @inheritParams connect_gpkg
 #' @param table_name Name of a GeoPackage table to read
-#' @noRd
+#' @export
 read_gpkg_table <- function(dsn = NULL,
                             con = NULL,
                             table_name = NULL,

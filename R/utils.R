@@ -38,8 +38,8 @@ check_gpkg <- function(x,
 #'
 #' @param dsn Path or url for GeoPackage file. Optional if con is provided.
 #' @param con Connection from [DBI::dbConnect()]. Optional if dsn is provided.
-#' @inheritParams check_gpkg
-#' @noRd
+#' @inheritParams cli::cli_abort
+#' @export
 #' @importFrom RSQLite dbConnect
 connect_gpkg <- function(dsn = NULL,
                          con = NULL,
