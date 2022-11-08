@@ -7,7 +7,7 @@ Authors@R: c(
     person("Research Institute for Nature and Forest", , , "info@inbo.be", role = "cph"),
     person("Eli", "Pousson", , "eli.pousson@gmail.com", role = c("aut", "ctb"),
            comment = c(ORCID = "0000-0001-8280-1706"))
-           )
+  )
 Description: The aim of this R package is to provide helper tools in
     creating or handling GeoPackage files, in order to complement other R
     spatial packages or GDAL. The package has no dependencies on other

@@ -9,12 +9,12 @@
 #'
 #' @format A data frame with 9 rows and 4 variables:
 #' \describe{
-#'   \item{\code{pos}}{Position/order}
-#'   \item{\code{extension}}{Extension title}
-#'   \item{\code{url}}{Detail URL}
-#'   \item{\code{reference}}{List column with reference tables for
+#'   \item{`pos`}{Position/order}
+#'   \item{`extension`}{Extension title}
+#'   \item{`url`}{Detail URL}
+#'   \item{`reference`}{List column with reference tables for
 #'   gpkg_extensions and other extension-specific tables.}
-#'}
+#' }
 "gpkg_extensions"
 
 #' Community GeoPackage Extensions
@@ -28,11 +28,11 @@
 #'
 #' @format A data frame with 15 rows and 5 variables:
 #' \describe{
-#'   \item{\code{pos}}{Position/order}
-#'   \item{\code{extension}}{Extension title}
-#'   \item{\code{description}}{Extension description}
-#'   \item{\code{url}}{Detail URL}
-#'   \item{\code{reference}}{List column with reference tables for
+#'   \item{`pos`}{Position/order}
+#'   \item{`extension`}{Extension title}
+#'   \item{`description`}{Extension description}
+#'   \item{`url`}{Detail URL}
+#'   \item{`reference`}{List column with reference tables for
 #'   gpkg_extensions and other extension-specific tables.}
-#'}
+#' }
 "community_gpkg_extensions"
