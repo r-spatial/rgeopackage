@@ -12,8 +12,7 @@ read_gpkg_extension(
   extension,
   table_name = NULL,
   call = .envir,
-  .envir = parent.frame(),
-  ...
+  .envir = parent.frame()
 )
 
 read_gpkg_schema(dsn, ...)
@@ -25,10 +24,10 @@ read_gpkg_metadata(dsn, ...)
 
 \item{con}{Connection from \code{\link[DBI:dbConnect]{DBI::dbConnect()}}. Optional if dsn is provided.}
 
-\item{extension}{Extension name}
+\item{extension}{Extension name. Required.}
 
 \item{table_name}{One or more table names required for the corresponding
-extension.}
+extension. Required.}
 
 \item{call}{The execution environment of a currently running
 function, e.g. \code{call = caller_env()}. The corresponding function
@@ -45,6 +44,9 @@ respectively not display any call or hard-code a code to display.
 For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
 
 \item{.envir}{Environment to evaluate the glue expressions in.}
+
+\item{...}{Additional parameters passed to \code{\link[=read_gpkg_extension]{read_gpkg_extension()}} by
+\code{\link[=read_gpkg_metadata]{read_gpkg_metadata()}} or \code{\link[=read_gpkg_schema]{read_gpkg_schema()}}.}
 }
 \description{
 Supports the metadata extension

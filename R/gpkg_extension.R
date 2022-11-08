@@ -5,10 +5,12 @@
 #' <http://www.geopackage.org/guidance/extensions/metadata.html> and the Schema
 #' extension <http://www.geopackage.org/guidance/extensions/schema.html>
 #'
-#' @param extension Extension name
+#' @param extension Extension name. Required.
 #' @param table_name One or more table names required for the corresponding
-#'   extension.
+#'   extension. Required.
 #' @inheritParams read_gpkg_table
+#' @param ... Additional parameters passed to [read_gpkg_extension()] by
+#'   [read_gpkg_metadata()] or [read_gpkg_schema()].
 #' @export
 #' @importFrom RSQLite dbDisconnect
 read_gpkg_extension <- function(dsn = NULL,
@@ -16,8 +18,7 @@ read_gpkg_extension <- function(dsn = NULL,
                                 extension,
                                 table_name = NULL,
                                 call = .envir,
-                                .envir = parent.frame(),
-                                ...) {
+                                .envir = parent.frame()) {
   con <- connect_gpkg(dsn, con, call, .envir)
 
   check_gpkg_extension(
@@ -46,8 +47,8 @@ read_gpkg_extension <- function(dsn = NULL,
 read_gpkg_schema <- function(dsn, ...) {
   read_gpkg_extension(
     dsn,
-    "gpkg_schema",
-    c("gpkg_data_columns", "gpkg_data_column_constraints"),
+    extension = "gpkg_schema",
+    table_name = c("gpkg_data_columns", "gpkg_data_column_constraints"),
     ...
   )
 }
@@ -58,8 +59,8 @@ read_gpkg_schema <- function(dsn, ...) {
 read_gpkg_metadata <- function(dsn, ...) {
   read_gpkg_extension(
     dsn,
-    "gpkg_metadata",
-    c("gpkg_metadata", "gpkg_metadata_reference"),
+    extension = "gpkg_metadata",
+    table_name = c("gpkg_metadata", "gpkg_metadata_reference"),
     ...
   )
 }
@@ -67,15 +68,15 @@ read_gpkg_metadata <- function(dsn, ...) {
 #' Check if extension is in gpkg_extensions table and GeoPackage file has
 #' extension related table names
 #'
-#' @param extension Extension name
+#' @param extension Extension name. Required.
 #' @param table_name One or more table names required for the corresponding
-#'   extension.
+#'   extension. Required.
 #' @noRd
 #' @importFrom RSQLite dbReadTable dbExistsTable dbDisconnect
 check_gpkg_extension <- function(dsn = NULL,
                                  con = NULL,
                                  extension,
-                                 table_name = NULL,
+                                 table_name,
                                  call = .envir,
                                  .envir = parent.frame()) {
   con <- connect_gpkg(dsn, con)
