@@ -18,7 +18,7 @@ check_gpkg <- function(x,
                        .envir = parent.frame()) {
   if (!file.exists(x)) {
     cli_abort(
-      "{.arg {arg}} must be a valid filename or path.",
+      "{.arg {arg}} must be a filename or path to an existing file.",
       call = call,
       .envir = .envir
     )
@@ -26,7 +26,7 @@ check_gpkg <- function(x,
 
   if (!is_gpkg(x)) {
     cli_abort(
-      "{.arg {arg}} must be a GeoPackage (gpkg) file.",
+      "{.arg {arg}} must be a {.file *.gpkg} (GeoPackage) file.",
       call = call,
       .envir = .envir
     )
