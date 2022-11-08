@@ -1,21 +1,29 @@
 #' Read and update GeoPackage contents table
 #'
+#' @inheritParams read_gpkg_table
 #' @export
-read_gpkg_contents <- function(dsn) {
+read_gpkg_contents <- function(dsn,
+                               quiet = FALSE) {
   read_gpkg_table(
     dsn = dsn,
-    table_name = "gpkg_contents"
+    table_name = "gpkg_contents",
+    quiet = quiet
   )
 }
 
 #' @name update_gpkg_contents
 #' @rdname read_gpkg_contents
+#' @param identifier Identifier for GeoPackage file.
+#' @param description Description for GeoPackage file.
+#' @inheritParams amend_timestamp
+#' @param title Title for GeoPackage file.
+#' @export
 #' @importFrom RSQLite dbDisconnect
 update_gpkg_contents <- function(dsn,
                                  identifier = NULL,
                                  description = NULL,
-                                 title = identifier,
                                  timestamp = Sys.time(),
+                                 title = identifier,
                                  quiet = FALSE) {
   con <- connect_gpkg(dsn)
   table_name <- "gpkg_contents"
