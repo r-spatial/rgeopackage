@@ -157,8 +157,8 @@ unset_timestamp <- function() {
 #' For a `Date` object, time will be considered as `00:00:00 UTC`.
 #' Defaults to system time, however must be set explicitly for reproducible
 #' workflows.
-#' @param verbose Logical.
-#' For each relevant table, prints a message with the number of affected rows.
+#' @param quiet If `TRUE`,print informational message
+#' @param verbose Deprecated. Logical. For each relevant table, prints a message with the number of affected rows.
 #'
 #' @return
 #' `NULL` is returned invisibly.
@@ -245,8 +245,13 @@ unset_timestamp <- function() {
 #' @export
 amend_timestamp <- function(dsn,
                             timestamp = Sys.time(),
+                            quiet = FALSE,
                             verbose = TRUE) {
-  stopifnot(is.logical(verbose), !is.na(verbose))
+  stopifnot(is.logical(quiet), !is.na(quiet))
+  if (verbose != !quiet) {
+    cli_warn("{.arg verbose} is deprecated, use {.arg quiet} instead.")
+  }
+
   timestamp <- fmt_timestamp(timestamp)
   con <- connect_gpkg(dsn = dsn)
 
@@ -254,12 +259,12 @@ amend_timestamp <- function(dsn,
     con,
     table_name = "gpkg_contents",
     statement = glue_sql("SET last_change = {timestamp}", .con = con),
-    message = "Updated {.file {basename(dsn)}} with timestamp {.val {timestamp}}",
-    quiet = !verbose
+    message = "Updated {.file {basename(dsn)}} timestamp to: {.val {timestamp}}",
+    quiet = quiet
   )
 
   has_metadata <-
-    has_query_rows(
+    has_query_min_rows(
       con,
       "SELECT name FROM sqlite_master
       WHERE name == 'gpkg_metadata_reference'",
@@ -302,7 +307,6 @@ fmt_timestamp <- function(timestamp,
                           call = .envir,
                           .envir = parent.frame()) {
   check_timestamp(timestamp, call, .envir)
-
   format(timestamp,
     format = "%Y-%m-%dT%H:%M:%S.000Z",
     tz = "UTC"

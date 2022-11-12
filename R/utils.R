@@ -1,3 +1,15 @@
+.onLoad <- function(lib, pkg) {
+  rlang::run_on_load()
+  utils::data(
+    list = c(
+      "gpkg_extensions",
+      "community_gpkg_extensions"
+    ),
+    package = pkg,
+    envir = parent.env(environment())
+  )
+}
+
 #' Is x an GeoPackage filename or path?
 #'
 #' @param x File name or path name
@@ -60,12 +72,32 @@ connect_gpkg <- function(dsn = NULL,
   con %||% RSQLite::dbConnect(RSQLite::SQLite(), dsn)
 }
 
+
+#' Does the named table exist for this connection?
+#'
+#' @noRd
+check_table_exists <- function(con,
+                               table_name = NULL,
+                               call = .envir,
+                               .envir = parent.frame()) {
+  if (!is.null(table_name) && RSQLite::dbExistsTable(con, table_name)) {
+    return(invisible(NULL))
+  }
+
+  cli_abort(
+    "Table {.val {table_name}} can't be found for the provided
+        {.arg dsn} or {.arg con}.",
+    call = call,
+    .envir = .envir
+  )
+}
+
 #' Does the query return the same or greater than the minimum number of rows?
 #'
 #' @noRd
 #' @importFrom RSQLite dbGetQuery
-has_query_rows <- function(con,
-                           query = NULL,
-                           min_rows = 1) {
+has_query_min_rows <- function(con,
+                               query = NULL,
+                               min_rows = 1) {
   nrow(RSQLite::dbGetQuery(con, glue_sql(query, .con = con))) >= min_rows
 }
