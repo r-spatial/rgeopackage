@@ -4,6 +4,7 @@
 \alias{read_gpkg_extension}
 \alias{read_gpkg_schema}
 \alias{read_gpkg_metadata}
+\alias{read_gpkg_related_tables}
 \title{Read GeoPackage tables associated with an extension}
 \usage{
 read_gpkg_extension(
@@ -15,9 +16,11 @@ read_gpkg_extension(
   .envir = parent.frame()
 )
 
+read_gpkg_metadata(dsn, ...)
+
 read_gpkg_schema(dsn, ...)
 
-read_gpkg_metadata(dsn, ...)
+read_gpkg_related_tables(dsn, ...)
 }
 \arguments{
 \item{dsn}{Path or url for GeoPackage file. Optional if con is provided.}
@@ -27,7 +30,7 @@ read_gpkg_metadata(dsn, ...)
 \item{extension}{Extension name. Required.}
 
 \item{table_name}{One or more table names required for the corresponding
-extension. Required.}
+extension. If \code{NULL}, there is no check to}
 
 \item{call}{The execution environment of a currently running
 function, e.g. \code{call = caller_env()}. The corresponding function
@@ -46,7 +49,12 @@ For more information about error calls, see \ifelse{html}{\link[rlang:topic-erro
 \item{.envir}{Environment to evaluate the glue expressions in.}
 
 \item{...}{Additional parameters passed to \code{\link[=read_gpkg_extension]{read_gpkg_extension()}} by
-\code{\link[=read_gpkg_metadata]{read_gpkg_metadata()}} or \code{\link[=read_gpkg_schema]{read_gpkg_schema()}}.}
+\code{\link[=read_gpkg_metadata]{read_gpkg_metadata()}}, \code{\link[=read_gpkg_schema]{read_gpkg_schema()}}, or
+\code{\link[=read_gpkg_related_tables]{read_gpkg_related_tables()}}.}
+}
+\value{
+A list of dataframes including any available table associated with
+the named extension.
 }
 \description{
 Supports the metadata extension

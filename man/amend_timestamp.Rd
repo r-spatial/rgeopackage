@@ -4,7 +4,7 @@
 \alias{amend_timestamp}
 \title{Amend the timestamp(s) in a GeoPackage file}
 \usage{
-amend_timestamp(dsn, timestamp = Sys.time(), verbose = TRUE)
+amend_timestamp(dsn, timestamp = Sys.time(), quiet = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{dsn}{the path to the GeoPackage file (*.gpkg)}
@@ -15,8 +15,9 @@ For a \code{Date} object, time will be considered as \verb{00:00:00 UTC}.
 Defaults to system time, however must be set explicitly for reproducible
 workflows.}
 
-\item{verbose}{Logical.
-For each relevant table, prints a message with the number of affected rows.}
+\item{quiet}{If \code{TRUE},print informational message}
+
+\item{verbose}{Deprecated. Logical. For each relevant table, prints a message with the number of affected rows.}
 }
 \value{
 \code{NULL} is returned invisibly.
