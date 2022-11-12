@@ -19,13 +19,17 @@ Imports:
     cli,
     glue,
     rlang,
-    RSQLite
+    RSQLite,
+    utils
 Suggests:
     dplyr,
     openssl,
+    rmarkdown,
     sf,
-    stars
+    stars,
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+Config/testthat/edition: 3
