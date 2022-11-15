@@ -27,7 +27,7 @@ update_gpkg_contents <- function(dsn,
                                  quiet = FALSE) {
   con <- connect_gpkg(dsn)
   table_name <- "gpkg_contents"
-  check_table_exists(table_name)
+  check_table_exists(con, table_name)
 
   if (!is.null(identifier)) {
     update_gpkg_table(
