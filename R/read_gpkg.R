@@ -8,16 +8,14 @@
 read_gpkg_table <- function(dsn = NULL,
                             con = NULL,
                             table_name = NULL,
-                            call = .envir,
-                            .envir = parent.frame(),
+                            call = parent.frame(),
                             quiet = FALSE) {
-  con <- connect_gpkg(dsn, con, call, .envir)
+  con <- connect_gpkg(dsn, con, call)
 
   if (is.null(table_name)) {
     cli_abort(
       "{.arg table_name} must be provided.",
-      call = call,
-      .envir = .envir
+      call = call
     )
   }
 

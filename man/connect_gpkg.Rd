@@ -4,7 +4,7 @@
 \alias{connect_gpkg}
 \title{Connect to GeoPackage data source}
 \usage{
-connect_gpkg(dsn = NULL, con = NULL, call = .envir, .envir = parent.frame())
+connect_gpkg(dsn = NULL, con = NULL, call = parent.frame())
 }
 \arguments{
 \item{dsn}{Path or url for GeoPackage file. Optional if con is provided.}
@@ -24,8 +24,6 @@ Can also be \code{NULL} or a \link[rlang:topic-defuse]{defused function call} to
 respectively not display any call or hard-code a code to display.
 
 For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
-
-\item{.envir}{Environment to evaluate the glue expressions in.}
 }
 \description{
 Connect to GeoPackage data source

@@ -275,7 +275,7 @@ amend_timestamp <- function(dsn,
       con,
       table_name = "gpkg_metadata_reference",
       statement = glue_sql("SET timestamp = {timestamp}", .con = con),
-      quiet = !verbose
+      quiet = quiet
     )
   }
 
@@ -288,14 +288,12 @@ amend_timestamp <- function(dsn,
 #'
 #' @noRd
 check_timestamp <- function(timestamp,
-                            call = .envir,
-                            .envir = parent.frame()) {
+                            call = parent.frame()) {
   if (!inherits(timestamp, c("Date", "POSIXct"))) {
     cli_abort(
       "{.arg timestamp} must be a {.cls Date} or {.cls POSIXct} object,
         not a {.cls {class(timestamp)}} object.",
-      call = call,
-      .envir = .envir
+      call = call
     )
   }
 }
@@ -304,9 +302,8 @@ check_timestamp <- function(timestamp,
 #'
 #' @noRd
 fmt_timestamp <- function(timestamp,
-                          call = .envir,
-                          .envir = parent.frame()) {
-  check_timestamp(timestamp, call, .envir)
+                          call = parent.frame()) {
+  check_timestamp(timestamp, call)
   format(timestamp,
     format = "%Y-%m-%dT%H:%M:%S.000Z",
     tz = "UTC"

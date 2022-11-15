@@ -12,10 +12,10 @@
 
 #' Is x an GeoPackage filename or path?
 #'
-#' @param x File name or path name
+#' @param x Character string to check if file name or path name
 #' @noRd
-is_gpkg <- function(x) {
-  grepl("\\.gpkg$", x)
+is_gpkg <- function(x, ignore.case = TRUE) {
+  grepl("\\.gpkg$", x, ignore.case = ignore.case)
 }
 
 #' Check if x is a GeoPackage file
@@ -25,22 +25,19 @@ is_gpkg <- function(x) {
 #' @noRd
 #' @importFrom rlang caller_arg
 check_gpkg <- function(x,
-                       arg = caller_arg(),
-                       call = .envir,
-                       .envir = parent.frame()) {
-  if (!file.exists(x)) {
-    cli_abort(
-      "{.arg {arg}} must be a filename or path to an existing file.",
-      call = call,
-      .envir = .envir
-    )
-  }
-
+                       arg = caller_arg(x),
+                       call = parent.env()) {
   if (!is_gpkg(x)) {
     cli_abort(
       "{.arg {arg}} must be a {.file *.gpkg} (GeoPackage) file.",
-      call = call,
-      .envir = .envir
+      call = call
+    )
+  }
+
+  if (!file.exists(x)) {
+    cli_abort(
+      "{.arg {arg}} must be a filename or path to an existing file.",
+      call = call
     )
   }
   invisible(NULL)
@@ -55,16 +52,14 @@ check_gpkg <- function(x,
 #' @importFrom RSQLite dbConnect
 connect_gpkg <- function(dsn = NULL,
                          con = NULL,
-                         call = .envir,
-                         .envir = parent.frame()) {
+                         call = parent.frame()) {
   if (!is.null(dsn)) {
-    check_gpkg(dsn, call = call, .envir = .envir)
+    check_gpkg(dsn, call = call)
 
     if (!is.null(con)) {
       cli_abort(
         "Exactly one of {.arg con} or {.arg dsn} must be supplied.",
-        call = call,
-        .envir = .envir
+        call = call
       )
     }
   }
@@ -78,8 +73,7 @@ connect_gpkg <- function(dsn = NULL,
 #' @noRd
 check_table_exists <- function(con,
                                table_name = NULL,
-                               call = .envir,
-                               .envir = parent.frame()) {
+                               call = parent.frame()) {
   if (!is.null(table_name) && RSQLite::dbExistsTable(con, table_name)) {
     return(invisible(NULL))
   }
@@ -87,8 +81,7 @@ check_table_exists <- function(con,
   cli_abort(
     "Table {.val {table_name}} can't be found for the provided
         {.arg dsn} or {.arg con}.",
-    call = call,
-    .envir = .envir
+    call = call
   )
 }
 

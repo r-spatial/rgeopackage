@@ -12,8 +12,7 @@ read_gpkg_extension(
   con = NULL,
   extension,
   table_name = NULL,
-  call = .envir,
-  .envir = parent.frame()
+  call = parent.frame()
 )
 
 read_gpkg_metadata(dsn, ...)
@@ -45,8 +44,6 @@ Can also be \code{NULL} or a \link[rlang:topic-defuse]{defused function call} to
 respectively not display any call or hard-code a code to display.
 
 For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
-
-\item{.envir}{Environment to evaluate the glue expressions in.}
 
 \item{...}{Additional parameters passed to \code{\link[=read_gpkg_extension]{read_gpkg_extension()}} by
 \code{\link[=read_gpkg_metadata]{read_gpkg_metadata()}}, \code{\link[=read_gpkg_schema]{read_gpkg_schema()}}, or

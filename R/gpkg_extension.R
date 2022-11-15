@@ -19,14 +19,13 @@ read_gpkg_extension <- function(dsn = NULL,
                                 con = NULL,
                                 extension,
                                 table_name = NULL,
-                                call = .envir,
-                                .envir = parent.frame()) {
-  con <- connect_gpkg(dsn, con, call, .envir)
+                                call = parent.frame()) {
+  con <- connect_gpkg(dsn, con, call)
 
   check_gpkg_extension(
     dsn = NULL, con = con,
     extension, table_name,
-    TRUE, call, .envir
+    TRUE, call
   )
 
   extension_tables <-
@@ -35,7 +34,7 @@ read_gpkg_extension <- function(dsn = NULL,
       function(x) {
         read_gpkg_table(
           dsn = NULL, con = con,
-          table_name = x, call, .envir
+          table_name = x, call
         )
       }
     )
@@ -104,16 +103,15 @@ check_gpkg_extension <- function(dsn = NULL,
                                  extension,
                                  table_name,
                                  check_table = TRUE,
-                                 call = .envir,
-                                 .envir = parent.frame()) {
+                                 call = parent.frame()) {
   con <- connect_gpkg(dsn, con)
 
   con_gpkg_extensions <- RSQLite::dbReadTable(con, "gpkg_extensions")
 
-  if (missing(extension) | missing(table_name)) {
+  if (missing(extension)) {
     cli_abort(
-      "Both {.arg extension} and {.arg table_name} must be provided.",
-      call = call, .envir = .envir
+      "{.arg extension} must be provided.",
+      call = call
     )
   }
 
@@ -124,8 +122,7 @@ check_gpkg_extension <- function(dsn = NULL,
     cli_abort(
       "{.arg extension} {.val {extension}} can't be found
       in the {.val gpkg_extensions} table.",
-      call = call,
-      .envir = .envir
+      call = call
     )
   }
 
@@ -134,8 +131,7 @@ check_gpkg_extension <- function(dsn = NULL,
   } else if (is.null(table_name)) {
     cli_abort(
       "{.arg table_name} must be provided.",
-      call = call,
-      .envir = .envir
+      call = call
     )
   }
 

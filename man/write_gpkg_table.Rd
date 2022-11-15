@@ -72,8 +72,6 @@ respectively not display any call or hard-code a code to display.
 
 For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
 
-\item{.envir}{Environment to evaluate the glue expressions in.}
-
 \item{quiet}{If \code{TRUE}, do not show informational messages. Defaults to
 \code{FALSE}.}
 

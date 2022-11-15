@@ -10,15 +10,14 @@ write_gpkg_table <- function(dsn = NULL,
                              con = NULL,
                              table_name = NULL,
                              table_data,
-                             call = .envir,
-                             .envir = parent.frame(),
-                             quiet = FALSE,
                              overwrite = FALSE,
                              append = FALSE,
                              header = TRUE,
                              temporary = FALSE,
+                             quiet = FALSE,
+                             call = parent.frame(),
                              ...) {
-  con <- connect_gpkg(dsn, con, call, .envir)
+  con <- connect_gpkg(dsn, con, call)
   if (is.list(table_data) && !is.data.frame(table_data)) {
     if (!header) {
       if (!quiet) {
@@ -87,10 +86,9 @@ append_gpkg_table <- function(dsn = NULL,
                               con = NULL,
                               table_name,
                               table_data,
-                              call = .envir,
-                              .envir = parent.frame(),
+                              call = parent.frame(),
                               ...) {
-  con <- connect_gpkg(dsn, con, call, .envir)
+  con <- connect_gpkg(dsn, con, call)
   RSQLite::dbAppendTable(con, table_name, table_data, ...)
   RSQLite::dbDisconnect(con)
 }
@@ -129,7 +127,6 @@ create_gpkg_table <- function(dsn = NULL,
       )
     }
   }
-
   RSQLite::dbDisconnect()
 }
 
@@ -138,8 +135,7 @@ create_gpkg_table <- function(dsn = NULL,
 #' @noRd
 #' @importFrom rlang is_named set_names
 check_table_data <- function(table_data,
-                             call = .envir,
-                             .envir = parent.frame()) {
+                             call = parent.frame()) {
   if (!is.data.frame(table_data)) {
     if (is.list(table_data) && rlang::is_named(table_data)) {
       table_data <-
@@ -150,7 +146,8 @@ check_table_data <- function(table_data,
     } else {
       cli_abort(
         "{.arg table_data} must be a named {.cls list} or
-        {.cls data.frame}, not a {.cls {class(table_data)}} object."
+        {.cls data.frame}, not a {.cls {class(table_data)}} object.",
+        call = call
       )
     }
   }
