@@ -2,29 +2,30 @@ Package: rgeopackage
 Title: Helper Tools in Creating or Handling GeoPackage Files
 Version: 0.0.0.900
 Authors@R: c(
-    person(given = "Floris",
-           family = "Vanderhaeghe",
-           role = c("aut", "cre"),
-           email = "floris.vanderhaeghe@inbo.be",
+    person("Floris", "Vanderhaeghe", , "floris.vanderhaeghe@inbo.be", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6378-6229")),
-    person("Research Institute for Nature and Forest", 
-           email = "info@inbo.be", 
-           role = "cph"))
-Description: The aim of this R package is to provide helper tools in 
-    creating or handling GeoPackage files, in order to complement
-    other R spatial packages or GDAL. The package has no dependencies 
-    on other spatial packages and is not tied to any particular package 
-    by design.
+    person("Research Institute for Nature and Forest", , , "info@inbo.be", role = "cph"),
+    person("Eli", "Pousson", , "eli.pousson@gmail.com", role = "ctb",
+           comment = c(ORCID = "0000-0001-8280-1706"))
+  )
+Description: The aim of this R package is to provide helper tools in
+    creating or handling GeoPackage files, in order to complement other R
+    spatial packages or GDAL. The package has no dependencies on other
+    spatial packages and is not tied to any particular package by design.
 License: GPL (>= 3)
 Depends: 
     R (>= 3.1.0)
 Suggests:
+    covr,
     dplyr,
     openssl,
     RSQLite,
     sf,
-    stars
+    stars,
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
