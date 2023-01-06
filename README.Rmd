@@ -31,7 +31,7 @@ You can install the development version of rgeopackage from [GitHub](https://git
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("r-spatial/rgeopackage")
+remotes::install_github("r-spatial/rgeopackage")
 ```
 
 ## Overview
