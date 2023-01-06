@@ -42,7 +42,7 @@ remotes::install_github("r-spatial/rgeopackage")
 The timestamp is adopted by GDAL during the entire session, unless `unset_timestamp()` is called.
 - `amend_timestamp()`: overwrites timestamps in the `gpkg_contents` and `gpkg_metadata_reference` tables of an existing GeoPackage file.
 
-By default, GDAL sets timestamps corresponding to system time, so GeoPackages change when rewriting. Both functions accept a `Date` or `POSIXct` object and use standard formatting for GeoPackage files.
+By default, GDAL sets timestamps corresponding to system time, so GeoPackages change when rewriting. Both functions accept a `Date` or `POSIXct` object and reformat to comply with the GeoPackage standard.
 
 ## Related R packages
 
