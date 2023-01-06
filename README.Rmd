@@ -27,7 +27,7 @@ More generally, it aims to provide features not readily available in mainstream 
 
 ## Installation
 
-You can install the development version of rgeopackage from [GitHub](https://github.com/) with:
+You can install the development version of `rgeopackage` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
