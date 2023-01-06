@@ -1,51 +1,61 @@
-## Helper tools to work with GeoPackage files in R
 
-### Functionality
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-The package currently provides following functions that assist in writing reproducible GeoPackage files:
+# rgeopackage
 
-- `preset_timestamp()`: presets the file timestamp for usage by GDAL by setting the environment variable `OGR_CURRENT_DATE`.
-The timestamp is adopted by GDAL during the entire session, unless `unset_timestamp()` is called.
-- `amend_timestamp()`: overwrites timestamps in the `gpkg_contents` and `gpkg_metadata_reference` tables of an existing GeoPackage file.
-While directly editing a GeoPackage is not advised, this function is especially useful in the presence of the optional table `gpkg_metadata_reference`, as GDAL does not control its timestamps as of writing (for GDAL 3.1.3).
-See a corresponding [issue](https://github.com/OSGeo/gdal/issues/3537) in the GDAL source repository.
+<!-- badges: start -->
 
-By default, GDAL sets timestamps corresponding to system time, so GeoPackages change when rewriting.
+[![CRAN
+status](https://www.r-pkg.org/badges/version/rgeopackage)](https://CRAN.R-project.org/package=rgeopackage)
+[![License: GPL
+v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/r-spatial/rgeopackage/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-spatial/rgeopackage?branch=main)
+<!-- badges: end -->
 
-Both functions accept a `Date` or `POSIXct` object and format the timestamp in order to comply with the GeoPackage requirement.
-See the functions' documentation and examples to get a better understanding.
+The goal of rgeopackage is to support reading and writing metadata
+associated with GeoPackage (gpkg) files and assist in writing
+reproducible GeoPackage files.
 
-### Installation
+## Installation
 
-```r
-remotes::install_github("r-spatial/rgeopackage")
+You can install the development version of rgeopackage from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("r-spatial/rgeopackage")
 ```
 
-### Untied to other packages
+## Overview
 
-`rgeopackage` has no dependencies on other spatial packages and is not tied to any particular package by design.
+### Updating file timestamps
 
-### Related functionality in core spatial R packages
+- `preset_timestamp()`: presets the file timestamp for usage by GDAL by
+  setting the environment variable `OGR_CURRENT_DATE`. The timestamp is
+  adopted by GDAL during the entire session, unless `unset_timestamp()`
+  is called.
+- `amend_timestamp()`: overwrites timestamps in the `gpkg_contents` and
+  `gpkg_metadata_reference` tables of an existing GeoPackage file.
 
-- `sf::st_write()` is [now able to](https://github.com/r-spatial/sf/issues/1618#issuecomment-811231056) set GDAL configuration options through its `config_options` argument.
-So when using `sf` you can pass the timestamp on a per-write basis:
+By default, GDAL sets timestamps corresponding to system time, so
+GeoPackages change when rewriting. Both functions accept a `Date` or
+`POSIXct` object and use standard formatting for GeoPackage files.
 
-  ```r
-  library(sf)
-  nc <- st_read(system.file('shape/nc.shp', package = 'sf'), quiet = TRUE)
-  fixed_time <- as.POSIXct("2020-12-25 12:00:00", tz = "CET")
-  # or using a Date object:
-  # fixed_time <- as.Date("2020-12-25")
-  timestamp <- format(fixed_time, format = "%Y-%m-%dT%H:%M:%S.000Z", tz = "UTC")
-  st_write(nc, 'nc.gpkg', config_options = c(OGR_CURRENT_DATE = timestamp))
-  ```
-  
-  Note that this does not affect the value of the environment variable `OGR_CURRENT_DATE`: `config_options = c(OGR_CURRENT_DATE = timestamp)` directly sets the GDAL `OGR_CURRENT_DATE` _configuration option_ which, if unset, inherits from the `OGR_CURRENT_DATE` environment variable.
-Also, note that `st_write()` ends by unsetting the configuration option, so set it in each `st_write()` statement as needed.
-  
-  In this case please take care to format the timestamp exactly as required by the GeoPackage standard; cf. example above and [Requirement 15](https://www.geopackage.org/spec120/#r15) in version 1.2.
-  
-- for packages relying on `rgdal` - like `sp` - it should be possible to set `OGR_CURRENT_DATE` by using `rgdal::setCPLConfigOption()` before doing the write operation.
-Again, take care to format the timestamp exactly as required by the GeoPackage standard.
+## Related R packages
 
+- The [sf package](https://r-spatial.github.io/sf/) allows users to set
+  GDAL configuration options in `sf::st_write()` using the
+  `config_options` argument ([see sf issue
+  \#1618](https://github.com/r-spatial/sf/issues/1618#issuecomment-811231056))
+  and in `sf::st_read()` using the `options` argument (see [sf issue
+  1157](https://github.com/r-spatial/sf/issues/1157)). sf also includes
+  a set of GDAL functions (e.g. `sf::gdal_metadata()`) that are not
+  intended to be called directly by the user but could be used to access
+  and edit GeoPackage metadata.
 
+- The [vapour package](https://hypertidy.github.io/vapour/index.html)
+  provides access to the basic read functions available in GDAL
+  including GeoPackage contents and extension tables.
