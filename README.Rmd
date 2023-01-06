@@ -22,7 +22,8 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/r-spatial/rgeopackage/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-spatial/rgeopackage?branch=main)
 <!-- badges: end -->
 
-The goal of rgeopackage is to support reading and writing metadata associated with GeoPackage (gpkg) files and assist in writing reproducible GeoPackage files.
+The current goal of `rgeopackage` is to support reading and writing metadata associated with GeoPackage (gpkg) files and assist in writing reproducible GeoPackage files.
+More generally, it aims to provide features not readily available in mainstream geospatial R packages, or perhaps uneasy to discover.
 
 ## Installation
 
