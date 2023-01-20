@@ -1,5 +1,4 @@
 .onLoad <- function(lib, pkg) {
-  rlang::run_on_load()
   utils::data(
     list = c(
       "gpkg_extensions",
