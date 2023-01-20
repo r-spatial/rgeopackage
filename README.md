@@ -33,6 +33,17 @@ remotes::install_github("r-spatial/rgeopackage")
 
 ## Overview
 
+rgeopackage uses the [RSQLite package](https://rsqlite.r-dbi.org/) and
+the `glue::glue_sql()` to use SQL statements to read and write
+non-spatial data to any table within a GeoPackage file.
+
+### Reading file metadata
+
+- `read_gpkg_contents()` returns a dataframe with the “gpkg_contents”
+  table.
+- `read_gpkg_metadata()` and `read_gpkg_schema()` return a list with the
+  related tables for the corresponding GeoPackage extension.
+
 ### Updating file timestamps
 
 - `preset_timestamp()`: presets the file timestamp for usage by GDAL by
@@ -46,6 +57,12 @@ By default, GDAL sets timestamps corresponding to system time, so
 GeoPackages change when rewriting. Both functions accept a `Date` or
 `POSIXct` object and reformat to comply with the [GeoPackage
 standard](https://www.geopackage.org/).
+
+### Reference data
+
+This package also includes reference tables for GeoPackage extensions
+(both registered `gpkg_extensions` and community
+`community_gpkg_extensions`).
 
 ## Related R packages
 
