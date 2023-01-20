@@ -11,14 +11,10 @@ The aim of this R package is to provide helper tools in creating or handling Geo
 \author{
 \strong{Maintainer}: Floris Vanderhaeghe \email{floris.vanderhaeghe@inbo.be} (\href{https://orcid.org/0000-0002-6378-6229}{ORCID})
 
-Authors:
-\itemize{
-  \item Eli Pousson \email{eli.pousson@gmail.com} (\href{https://orcid.org/0000-0001-8280-1706}{ORCID}) [contributor]
-}
-
 Other contributors:
 \itemize{
   \item Research Institute for Nature and Forest \email{info@inbo.be} [copyright holder]
+  \item Eli Pousson \email{eli.pousson@gmail.com} (\href{https://orcid.org/0000-0001-8280-1706}{ORCID}) [contributor]
 }
 
 }

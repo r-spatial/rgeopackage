@@ -6,4 +6,4 @@
 
 ## usethis namespace: start
 ## usethis namespace: end
-rlang::on_load(rlang::local_use_cli())
+NULL

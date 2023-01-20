@@ -1,6 +1,7 @@
 ^rgeopackage\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^codecov\.yml$
 ^README\.Rmd$
 ^data-raw$
 ^vignettes/articles$
