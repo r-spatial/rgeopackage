@@ -12,13 +12,12 @@ write_gpkg_table(
   con = NULL,
   table_name = NULL,
   table_data,
-  call = .envir,
-  .envir = parent.frame(),
-  quiet = FALSE,
   overwrite = FALSE,
   append = FALSE,
   header = TRUE,
   temporary = FALSE,
+  quiet = FALSE,
+  call = parent.frame(),
   ...
 )
 
@@ -36,8 +35,7 @@ append_gpkg_table(
   con = NULL,
   table_name,
   table_data,
-  call = .envir,
-  .envir = parent.frame(),
+  call = parent.frame(),
   ...
 )
 
@@ -58,6 +56,11 @@ create_gpkg_table(
 
 \item{table_name}{Name of a GeoPackage table to read}
 
+\item{temporary}{If \code{TRUE}, will generate a temporary table statement.}
+
+\item{quiet}{If \code{TRUE}, do not show informational messages. Defaults to
+\code{FALSE}.}
+
 \item{call}{The execution environment of a currently running
 function, e.g. \code{call = caller_env()}. The corresponding function
 call is retrieved and mentioned in error messages as the source
@@ -71,11 +74,6 @@ Can also be \code{NULL} or a \link[rlang:topic-defuse]{defused function call} to
 respectively not display any call or hard-code a code to display.
 
 For more information about error calls, see \ifelse{html}{\link[rlang:topic-error-call]{Including function calls in error messages}}{\link[rlang:topic-error-call]{Including function calls in error messages}}.}
-
-\item{quiet}{If \code{TRUE}, do not show informational messages. Defaults to
-\code{FALSE}.}
-
-\item{temporary}{If \code{TRUE}, will generate a temporary table statement.}
 
 \item{...}{
   Arguments passed on to \code{\link[DBI:dbWriteTable]{DBI::dbWriteTable}}
