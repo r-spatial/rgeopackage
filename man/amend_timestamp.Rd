@@ -4,19 +4,20 @@
 \alias{amend_timestamp}
 \title{Amend the timestamp(s) in a GeoPackage file}
 \usage{
-amend_timestamp(dsn, timestamp = Sys.time(), verbose = TRUE)
+amend_timestamp(dsn, timestamp = Sys.time(), quiet = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{dsn}{the path to the GeoPackage file (*.gpkg)}
 
 \item{timestamp}{a \code{Date} or \code{POSIXct} object, used to generate
 the timestamp.
-For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.
+For a \code{Date} object, time will be considered as \verb{00:00:00 UTC}.
 Defaults to system time, however must be set explicitly for reproducible
 workflows.}
 
-\item{verbose}{Logical.
-For each relevant table, prints a message with the number of affected rows.}
+\item{quiet}{If \code{TRUE},print informational message}
+
+\item{verbose}{Deprecated. Logical. For each relevant table, prints a message with the number of affected rows.}
 }
 \value{
 \code{NULL} is returned invisibly.
@@ -34,7 +35,7 @@ that is required by the GeoPackage standard.
 }
 \note{
 Directly editing a GeoPackage is not advised; whenever possible use
-\code{\link{preset_timestamp}()} since it goes via GDAL.
+\code{\link[=preset_timestamp]{preset_timestamp()}} since it goes via GDAL.
 
 However \code{amend_timestamp()} is especially useful when a
 GeoPackage file also contains a timestamp in the optional table
@@ -118,8 +119,8 @@ all.equal(md5_stars1, md5_stars2)
 }
 \seealso{
 Other functions to control the GeoPackage timestamp(s):
-\code{\link{preset_timestamp}},
-\code{\link[sf:st_write]{sf::st_write}}
+\code{\link[=preset_timestamp]{preset_timestamp()}},
+\code{\link[sf:st_write]{sf::st_write()}}
 }
 \author{
 Floris Vanderhaeghe, \url{https://github.com/florisvdh}

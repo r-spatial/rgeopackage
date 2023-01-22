@@ -12,7 +12,7 @@ unset_timestamp()
 \arguments{
 \item{timestamp}{a \code{Date} or \code{POSIXct} object, used to generate
 the timestamp.
-For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.}
+For a \code{Date} object, time will be considered as \verb{00:00:00 UTC}.}
 }
 \value{
 Previous value of environment variable \code{OGR_CURRENT_DATE} is returned
@@ -23,12 +23,12 @@ Presets the timestamp for usage by GDAL by setting the environment variable
 \code{OGR_CURRENT_DATE}.
 After this, newly written GeoPackage files
 created by the GDAL vector or raster driver (e.g. through
-\code{sf::st_write()} or \code{stars::write_stars()})
+\code{\link[sf:st_write]{sf::st_write()}} or \code{\link[stars:write_stars]{stars::write_stars()}})
 will carry this timestamp.
-As such \code{preset_timestamp()} assists in making a binary-reproducible
+As such \code{\link[=preset_timestamp]{preset_timestamp()}} assists in making a binary-reproducible
 GeoPackage file.
 
-\code{unset_timestamp()} removes \code{OGR_CURRENT_DATE} from the
+\code{\link[=unset_timestamp]{unset_timestamp()}} removes \code{OGR_CURRENT_DATE} from the
 environment.
 }
 \details{
@@ -39,8 +39,8 @@ version 1.3.
 GDAL uses the timestamp to set the \code{last_change} column of the
 \code{gpkg_contents} table in newly written GeoPackage files.
 
-The timestamp set by \code{preset_timestamp()} is adopted by GDAL during
-the entire session, unless \code{unset_timestamp()} is called.
+The timestamp set by \code{\link[=preset_timestamp]{preset_timestamp()}} is adopted by GDAL during
+the entire session, unless \code{\link[=unset_timestamp]{unset_timestamp()}} is called.
 }
 \examples{
 library(sf)
@@ -115,8 +115,8 @@ all.equal(md5_stars1, md5_stars2)
 }
 \seealso{
 Other functions to control the GeoPackage timestamp(s):
-\code{\link{amend_timestamp}},
-\code{\link[sf:st_write]{sf::st_write}}
+\code{\link[=amend_timestamp]{amend_timestamp()}},
+\code{\link[sf:st_write]{sf::st_write()}}
 }
 \author{
 Floris Vanderhaeghe, \url{https://github.com/florisvdh}
