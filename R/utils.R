@@ -60,6 +60,7 @@ update_gpkg_table <- function(con,
     }
 }
 
+
 #' Is x an GeoPackage filename or path?
 #'
 #' @param x Character string to check if file name or path name
@@ -67,6 +68,7 @@ update_gpkg_table <- function(con,
 is_gpkg <- function(x, ignore.case = TRUE) {
   grepl("\\.gpkg$", x, ignore.case = ignore.case)
 }
+
 
 #' Check if x is a GeoPackage file
 #'
@@ -90,4 +92,23 @@ check_gpkg <- function(x,
       call = call
     )
   }
+}
+
+
+#' @noRd
+get_spec <- function(table_name = NULL, v = "1.3.1", ...) {
+    if (v != "1.3.1") {
+        cli_warn(
+            "{.pkg rgeopackage} supports version: 1.3.1 of the OGC GeoPackage spec."
+        )
+    }
+    spec131[[table_name]]
+}
+
+
+#' @noRd
+#' @importFrom rlang as_function global_env
+map <- function(.x, .f, ...) {
+    .f <- rlang::as_function(.f, env = rlang::global_env())
+    lapply(.x, .f, ...)
 }

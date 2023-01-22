@@ -15,6 +15,10 @@ Description: The aim of this R package is to provide helper tools in
 License: GPL (>= 3)
 Depends: 
     R (>= 3.1.0)
+Imports: 
+    cli,
+    glue,
+    rlang
 Suggests:
     covr,
     dplyr,
@@ -23,7 +27,8 @@ Suggests:
     sf,
     stars,
     testthat (>= 3.0.0),
-    withr
+    withr,
+    xml2
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
