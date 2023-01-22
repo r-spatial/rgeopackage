@@ -2,40 +2,40 @@
 #'
 #' @description
 #' Presets the timestamp for usage by GDAL by setting the environment variable
-#' \code{OGR_CURRENT_DATE}.
+#' `OGR_CURRENT_DATE`.
 #' After this, newly written GeoPackage files
 #' created by the GDAL vector or raster driver (e.g. through
-#' \code{sf::st_write()} or \code{stars::write_stars()})
+#' [sf::st_write()] or [stars::write_stars()])
 #' will carry this timestamp.
-#' As such \code{preset_timestamp()} assists in making a binary-reproducible
+#' As such [preset_timestamp()] assists in making a binary-reproducible
 #' GeoPackage file.
 #'
-#' \code{unset_timestamp()} removes \code{OGR_CURRENT_DATE} from the
+#' [unset_timestamp()] removes `OGR_CURRENT_DATE` from the
 #' environment.
 #'
 #' @details
 #' The function converts the timestamp to a very specific ISO 8601 format
 #' that is required by the GeoPackage standard, including conversion to UTC.
-#' Cf. \href{https://www.geopackage.org/spec130/#r15}{Requirement 15} in
+#' Cf. [Requirement 15](https://www.geopackage.org/spec130/#r15) in
 #' version 1.3.
-#' GDAL uses the timestamp to set the \code{last_change} column of the
-#' \code{gpkg_contents} table in newly written GeoPackage files.
+#' GDAL uses the timestamp to set the `last_change` column of the
+#' `gpkg_contents` table in newly written GeoPackage files.
 #'
-#' The timestamp set by \code{preset_timestamp()} is adopted by GDAL during
-#' the entire session, unless \code{unset_timestamp()} is called.
+#' The timestamp set by [preset_timestamp()] is adopted by GDAL during
+#' the entire session, unless [unset_timestamp()] is called.
 #'
-#' @param timestamp a \code{Date} or \code{POSIXct} object, used to generate
+#' @param timestamp a `Date` or `POSIXct` object, used to generate
 #' the timestamp.
-#' For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.
+#' For a `Date` object, time will be considered as `00:00:00 UTC`.
 #'
 #' @return
-#' Previous value of environment variable \code{OGR_CURRENT_DATE} is returned
+#' Previous value of environment variable `OGR_CURRENT_DATE` is returned
 #' invisibly.
 #'
 #' @seealso
 #' Other functions to control the GeoPackage timestamp(s):
-#' \code{\link{amend_timestamp}},
-#' \code{\link[sf:st_write]{sf::st_write}}
+#' [amend_timestamp()],
+#' [sf::st_write()]
 #'
 #' @examples
 #' library(sf)
@@ -107,39 +107,32 @@
 #' # compare:
 #' all.equal(md5_stars1, md5_stars2)
 #'
-#' @author Floris Vanderhaeghe, \url{https://github.com/florisvdh}
+#' @author Floris Vanderhaeghe, <https://github.com/florisvdh>
 #'
 #' @export
 preset_timestamp <- function(timestamp) {
-  if (!inherits(timestamp, c("Date", "POSIXct"))) {
-    stop("timestamp must be a Date or POSIXct object")
-  }
+    timestamp <- fmt_timestamp(timestamp)
 
-  timestamp <- format(timestamp,
-    format = "%Y-%m-%dT%H:%M:%S.000Z",
-    tz = "UTC"
-  )
+    old <- Sys.getenv("OGR_CURRENT_DATE")
+    Sys.setenv(OGR_CURRENT_DATE = timestamp)
 
-  old <- Sys.getenv("OGR_CURRENT_DATE")
-  Sys.setenv(OGR_CURRENT_DATE = timestamp)
-
-  return(invisible(old))
+    invisible(old)
 }
-
 
 
 #' @rdname preset_timestamp
 #' @export
-unset_timestamp <- function() Sys.unsetenv("OGR_CURRENT_DATE")
-
+unset_timestamp <- function() {
+    Sys.unsetenv("OGR_CURRENT_DATE")
+}
 
 
 #' Amend the timestamp(s) in a GeoPackage file
 #'
-#' Overwrites all timestamps (column \code{last_change}) of the
-#' \code{gpkg_contents} table in an existing GeoPackage file.
-#' If the optional table \code{gpkg_metadata_reference} is present, does the
-#' same with its \code{timestamp} column.
+#' Overwrites all timestamps (column `last_change`) of the
+#' `gpkg_contents` table in an existing GeoPackage file.
+#' If the optional table `gpkg_metadata_reference` is present, does the
+#' same with its `timestamp` column.
 #' As such the function assists in making a binary-reproducible GeoPackage file.
 #'
 #' Internally the timestamp is converted to a specific ISO 8601 format
@@ -147,31 +140,31 @@ unset_timestamp <- function() Sys.unsetenv("OGR_CURRENT_DATE")
 #'
 #' @note
 #' Directly editing a GeoPackage is not advised; whenever possible use
-#' \code{\link{preset_timestamp}()} since it goes via GDAL.
+#' [preset_timestamp()] since it goes via GDAL.
 #'
-#' However \code{amend_timestamp()} is especially useful when a
+#' However `amend_timestamp()` is especially useful when a
 #' GeoPackage file also contains a timestamp in the optional table
-#' \code{gpkg_metadata_reference}, as GDAL does not control that timestamp
+#' `gpkg_metadata_reference`, as GDAL does not control that timestamp
 #' as of writing (for GDAL 3.1.3).
-#' See a corresponding \href{https://github.com/OSGeo/gdal/issues/3537}{issue}
+#' See a corresponding [issue](https://github.com/OSGeo/gdal/issues/3537)
 #' in the GDAL source repository.
 #'
 #' @param dsn the path to the GeoPackage file (*.gpkg)
-#' @param timestamp a \code{Date} or \code{POSIXct} object, used to generate
+#' @param timestamp a `Date` or `POSIXct` object, used to generate
 #' the timestamp.
-#' For a \code{Date} object, time will be considered as \code{00:00:00 UTC}.
+#' For a `Date` object, time will be considered as `00:00:00 UTC`.
 #' Defaults to system time, however must be set explicitly for reproducible
 #' workflows.
-#' @param verbose Logical.
-#' For each relevant table, prints a message with the number of affected rows.
+#' @param quiet If `TRUE`,print informational message
+#' @param verbose Deprecated. Logical. For each relevant table, prints a message with the number of affected rows.
 #'
 #' @return
-#' \code{NULL} is returned invisibly.
+#' `NULL` is returned invisibly.
 #'
 #' @seealso
 #' Other functions to control the GeoPackage timestamp(s):
-#' \code{\link{preset_timestamp}},
-#' \code{\link[sf:st_write]{sf::st_write}}
+#' [preset_timestamp()],
+#' [sf::st_write()]
 #'
 #' @examples
 #' library(sf)
@@ -245,68 +238,85 @@ unset_timestamp <- function() Sys.unsetenv("OGR_CURRENT_DATE")
 #' # compare:
 #' all.equal(md5_stars1, md5_stars2)
 #'
-#' @author Floris Vanderhaeghe, \url{https://github.com/florisvdh}
+#' @author Floris Vanderhaeghe, <https://github.com/florisvdh>
 #'
 #' @export
 amend_timestamp <- function(dsn,
                             timestamp = Sys.time(),
+                            quiet = FALSE,
                             verbose = TRUE) {
-  stopifnot(file.exists(dsn))
-  stopifnot(is.logical(verbose), !is.na(verbose))
-  # soft checking file format:
-  if (!grepl("\\.gpkg$", dsn)) {
-    stop("Expecting a file with extension '.gpkg'")
-  }
-  if (!inherits(timestamp, c("Date", "POSIXct"))) {
-    stop("timestamp must be a Date or POSIXct object")
-  }
-
-  if (!requireNamespace("RSQLite", quietly = TRUE)) {
-    stop("Package \"RSQLite\" is needed when using this function. ",
-      "Please install it.",
-      call. = FALSE
-    )
-  }
-
-  timestamp <- format(timestamp,
-    format = "%Y-%m-%dT%H:%M:%S.000Z",
-    tz = "UTC"
-  )
-
-  con <- RSQLite::dbConnect(RSQLite::SQLite(), dsn)
-  updatequery <- sprintf(
-    "UPDATE gpkg_contents SET last_change = '%s'",
-    timestamp
-  )
-  rows <- RSQLite::dbExecute(con, updatequery)
-  if (verbose) {
-    message(
-      rows,
-      " row(s) of the gpkg_contents table have been set with timestamp ",
-      timestamp
-    )
-  }
-
-  has_metadata <-
-    nrow(RSQLite::dbGetQuery(con, "SELECT name FROM sqlite_master
-						WHERE name == 'gpkg_metadata_reference'")) > 0
-  if (has_metadata) {
-    updatequery <-
-      sprintf(
-        "UPDATE gpkg_metadata_reference SET timestamp = '%s'",
-        timestamp
-      )
-    rows <- RSQLite::dbExecute(con, updatequery)
-    if (verbose) {
-      message(
-        rows,
-        " row(s) of the gpkg_metadata_reference table have ",
-        "been set with timestamp ",
-        timestamp
-      )
+    stopifnot(is.logical(quiet), !is.na(quiet))
+    if (verbose != !quiet) {
+        cli_warn("{.arg verbose} is deprecated, use {.arg quiet} instead.")
     }
-  }
 
-  RSQLite::dbDisconnect(con)
-  return(invisible(NULL))
+    timestamp <- fmt_timestamp(timestamp)
+    con <- connect_gpkg(dsn = dsn)
+
+    update_gpkg_table(
+        con,
+        table_name = "gpkg_contents",
+        statement = glue_sql("SET last_change = {timestamp}", .con = con),
+        message = "Updated {.file {basename(dsn)}} timestamp to: {.val {timestamp}}",
+        quiet = quiet
+    )
+
+    has_metadata <-
+        has_query_min_rows(
+            con,
+            "SELECT name FROM sqlite_master
+      WHERE name == 'gpkg_metadata_reference'",
+        )
+
+    if (has_metadata) {
+        update_gpkg_table(
+            con,
+            table_name = "gpkg_metadata_reference",
+            statement = glue_sql("SET timestamp = {timestamp}", .con = con),
+            quiet = quiet
+        )
+    }
+
+    RSQLite::dbDisconnect(con)
+    invisible(NULL)
+}
+
+
+#' Format timestamp
+#'
+#' @noRd
+#' @importFrom rlang try_fetch
+fmt_timestamp <- function(timestamp,
+                          format = "%Y-%m-%dT%H:%M:%S.000Z",
+                          tz = "UTC",
+                          call = parent.frame()) {
+    if (!is.numeric.POSIXt(timestamp) & !is.numeric.Date(timestamp)) {
+        timestamp <- rlang::try_fetch(
+            as.POSIXct(timestamp),
+            error = function(cnd) {
+                NA
+            }
+        )
+    }
+
+    check_timestamp(timestamp, call)
+    format(timestamp,
+           format = format,
+           tz = tz
+    )
+}
+
+
+#' Check if timestamp is a Date or POSIXct object
+#'
+#' @noRd
+check_timestamp <- function(timestamp,
+                            call = parent.frame()) {
+    if (!inherits(timestamp, c("Date", "POSIXct"))) {
+        cli_abort(
+            "{.arg timestamp} must be a {.cls Date} or {.cls POSIXct} object
+      or coercible to a {.cls POSIXct} object.",
+      call = call
+        )
+    }
 }
